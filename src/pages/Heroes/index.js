@@ -1,8 +1,18 @@
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
-// import api from '../../services/api';
+import api from '../../services/api';
 
 export default function Heroes(){
+
+  const[my_heroes, setHeroes] = useState([]);
+  const navigate = useNavigate();
+
+  // Read, carrega dados da api
+  useEffect(() => {
+    api.get("api/v1/heroes",{})
+    .then(response => {setHeroes(response.data)})
+  },[]);
+
   return(
     
     <div data-testid="mycard" className="card border-primary" style={{marginTop: '20px'}} >
@@ -17,27 +27,30 @@ export default function Heroes(){
       <table data-testid="mytable" className="table table-hover">
         <thead>
           <tr>
-            <th scope="col">##</th>
-            <th scope="col">##</th>
-            <th scope="col">##</th>
-            <th scope="col">##</th>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row"></th>
-              <td></td>
-              <td></td>
+          {my_heroes.map(hero => (
+            <tr key={hero.id}>
+            <th scope="row">{hero.id}</th>
+              <td>{hero.name}</td>
+              <td>{hero.description}</td>
               <td>
 
               <button data-testid="mybtn1" type="button"
-              className="btn btn-outline-info">Editar</button>
+              className="btn btn-outline-info" style={{margin: '2px'}}>Editar</button>
 
               <button data-testid="mybtn2" type="button"
-              className="btn btn-outline-danger">Excluir</button>
+              className="btn btn-outline-danger" style={{margin: '2px'}}>Excluir</button>
 
               </td>
           </tr>
+          ))}
+          
         </tbody>
       </table>
 
