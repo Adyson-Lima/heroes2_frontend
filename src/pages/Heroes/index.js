@@ -22,6 +22,16 @@ export default function Heroes(){
     }
   }
 
+  // DELETE, remove registro na api
+  async function deleteHero(id){
+    try {
+      await api.delete(`api/v1/heroes/${id}`,{});
+      setHeroes(my_heroes.filter(hero => hero.id !== id));
+    } catch (error) {
+      alert("Erro ao excluir!")      
+    }
+  }
+
   return(
     
     <div data-testid="mycard" className="card border-primary" style={{marginTop: '20px'}} >
@@ -55,7 +65,8 @@ export default function Heroes(){
               onClick={() => updateHero(hero.id)}>Editar</button>
 
               <button data-testid="mybtn2" type="button"
-              className="btn btn-outline-danger" style={{margin: '2px'}}>Excluir</button>
+              className="btn btn-outline-danger" style={{margin: '2px'}}
+              onClick={() => deleteHero(hero.id)}>Excluir</button>
 
               </td>
           </tr>
