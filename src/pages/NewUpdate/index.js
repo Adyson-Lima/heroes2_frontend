@@ -29,6 +29,9 @@ export default function NewUpdate(){
           style={{marginBottom: '20px'}} className="form-control" 
           placeholder="###"></input>
         </div>
+
+        <button data-testid="btnenviar" type="submit" 
+        className="btn btn-primary">Enviar</button>
       
       </form>
 
