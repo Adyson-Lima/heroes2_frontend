@@ -16,4 +16,8 @@ describe('Testes da tela Heroes', () => {
     expect(screen.getByTestId('mycard')).toBeInTheDocument();
   });
 
+  it('Existe Link novo em Heroes?', () => {
+    expect(screen.getByTestId('mylink')).toBeInTheDocument();
+  });
+
 });
