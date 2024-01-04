@@ -13,6 +13,15 @@ export default function Heroes(){
     .then(response => {setHeroes(response.data)})
   },[]);
 
+  // UPDATE, atualiza dados na api
+  async function updateHero(id){
+    try {
+      navigate(`/newupdate/${id}`);
+    } catch (error) {
+      alert('Erro ao atualizar!');      
+    }
+  }
+
   return(
     
     <div data-testid="mycard" className="card border-primary" style={{marginTop: '20px'}} >
@@ -42,7 +51,8 @@ export default function Heroes(){
               <td>
 
               <button data-testid="mybtn1" type="button"
-              className="btn btn-outline-info" style={{margin: '2px'}}>Editar</button>
+              className="btn btn-outline-info" style={{margin: '2px'}}
+              onClick={() => updateHero(hero.id)}>Editar</button>
 
               <button data-testid="mybtn2" type="button"
               className="btn btn-outline-danger" style={{margin: '2px'}}>Excluir</button>
